@@ -40,6 +40,8 @@
     .hero { padding: clamp(74px, 12vw, 142px) 0 92px; position: relative; }
     .hero::after { content: ""; position: absolute; z-index: -1; width: 440px; height: 440px; border: 1px solid #f0e9f4; border-radius: 50%; right: -185px; top: 20px; box-shadow: 0 0 0 48px #faf7fc, 0 0 0 96px #fdfbfd; }
     .eyebrow { margin: 0 0 18px; color: var(--purple); font-size: .78rem; font-weight: 750; letter-spacing: .16em; text-transform: uppercase; }
+    .hero-title-row { display: flex; align-items: center; gap: 18px; }
+    .hero-photo { width: 78px; height: 78px; flex: 0 0 auto; border: 3px solid var(--purple-pale); border-radius: 50%; object-fit: cover; }
     h1 { max-width: 750px; margin: 0; font-size: clamp(3rem, 8vw, 6.6rem); letter-spacing: -.075em; line-height: .99; font-weight: 740; }
     h1 span { color: var(--ink); }
     .hero-copy { max-width: 580px; margin: 26px 0 0; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.25rem); }
@@ -64,17 +66,6 @@
     .project-card h3 { margin: 35px 0 0; font-size: 1.28rem; letter-spacing: -.035em; line-height: 1.35; }
     .project-lines { margin-top: 23px; color: var(--muted); font-size: .9rem; line-height: 1.55; }
     .project-lines span { display: block; }
-    .gallery-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-    .gallery-photo { width: 100%; display: block; padding: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 7px; background: white; text-align: left; cursor: zoom-in; }
-    .gallery-photo img { display: block; width: 100%; height: 260px; object-fit: cover; transition: transform .2s ease; }
-    .gallery-photo:hover img { transform: scale(1.025); }
-    .gallery-caption { display: block; padding: 12px 15px; color: var(--ink); font-size: .92rem; font-weight: 600; }
-    .photo-lightbox { width: min(92vw, 1000px); max-width: none; max-height: 92vh; padding: 16px; border: 0; border-radius: 8px; background: #fff; color: var(--ink); }
-    .photo-lightbox::backdrop { background: rgb(22 16 27 / 84%); }
-    .lightbox-close { display: block; margin: 0 0 10px auto; padding: 7px 12px; border: 1px solid var(--line); border-radius: 4px; background: white; color: var(--ink); font: inherit; cursor: pointer; }
-    .photo-lightbox figure { margin: 0; text-align: center; }
-    .photo-lightbox img { display: block; max-width: 100%; max-height: 78vh; margin: auto; object-fit: contain; }
-    .photo-lightbox figcaption { padding-top: 10px; color: var(--muted); font-size: .92rem; }
     .publication-list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
     .publication-item { display: grid; grid-template-columns: 90px 1fr; gap: 22px; padding: 24px 0; border-bottom: 1px solid var(--line); }
     .publication-year { color: var(--purple); font-size: 1.1rem; font-weight: 750; }
@@ -101,8 +92,8 @@
       section { padding: 64px 0; }
       .section-heading { grid-template-columns: 1fr; gap: 12px; }
       .project-grid { grid-template-columns: 1fr; }
-      .gallery-grid { grid-template-columns: 1fr; }
-      .gallery-photo img { height: 280px; }
+      .hero-photo { width: 62px; height: 62px; }
+      h1 { font-size: clamp(2.45rem, 9.5vw, 3.5rem); }
       .publication-item { grid-template-columns: 1fr; gap: 4px; }
       .project-card { min-height: 205px; }
       .project-card h3 { margin-top: 26px; }
@@ -125,7 +116,6 @@
       <a class="wordmark" href="#home">Rosa Silva</a>
       <nav aria-label="Main navigation">
         <a href="#about">About</a>
-        <a href="#gallery">Gallery</a>
         <a href="#publications">Publications</a>
         <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
@@ -136,7 +126,10 @@
   <main id="home">
     <div class="wrap hero">
       <p class="eyebrow">Biomedical Engineering</p>
-      <h1>Rosa <span>Silva</span></h1>
+      <div class="hero-title-row">
+        <img class="hero-photo" src="https://rosasilvah.github.io/assets/home-BqrcBFPt.jpg" alt="Portrait of Rosa Silva">
+        <h1>Rosa <span>Silva</span></h1>
+      </div>
       <p class="hero-copy"><span class="sr-only">Master’s student interested in surgical robotics.</span><span class="typing-text" aria-hidden="true"></span></p>
       <div class="hero-links">
         <a class="button" href="#projects">View projects</a>
@@ -148,28 +141,6 @@
         <p class="section-kicker">About</p>
         <div>
           <p class="about-text">I am a second-year Master’s student in Dr. Su’s lab, working on force sensing for neurovascular robots in stroke intervention. Previously, I contributed to the DeSimone Lab at Stanford University, optimizing 3D-printed microneedle patches. I have also worked in the Jurney Lab and Bellofiore Lab at SJSU.</p>
-        </div>
-      </div>
-    </section>
-    <section id="gallery">
-      <div class="wrap">
-        <div class="section-heading">
-          <p class="section-kicker">Photos</p>
-          <div><h2>Photo gallery</h2></div>
-        </div>
-        <div class="gallery-grid">
-          <button class="gallery-photo" type="button" aria-label="Open photo: Rosa Silva" data-caption="Rosa Silva">
-            <img src="https://rosasilvah.github.io/assets/home-BqrcBFPt.jpg" alt="" loading="lazy">
-            <span class="gallery-caption">Rosa Silva</span>
-          </button>
-          <button class="gallery-photo" type="button" aria-label="Open photo: Big Sur" data-caption="Big Sur">
-            <img src="https://rosasilvah.github.io/assets/big-sur-C3ednzqs.jpg" alt="" loading="lazy">
-            <span class="gallery-caption">Big Sur</span>
-          </button>
-          <button class="gallery-photo" type="button" aria-label="Open photo: NYC" data-caption="NYC">
-            <img src="https://rosasilvah.github.io/assets/nyc-Dj_0c9ev.jpg" alt="" loading="lazy">
-            <span class="gallery-caption">NYC</span>
-          </button>
         </div>
       </div>
     </section>
@@ -200,7 +171,7 @@
             <span class="publication-year">—</span>
             <div>
               <p class="publication-type">Poster · SJSU · Jurney Lab · Year not listed</p>
-              <h3><a href="https://rosasilvah.github.io/mitochondria-poster.jpg" target="_blank" rel="noopener noreferrer">The Effect of Fluidic Shear Stresses on Mitochondrial Networks in Endothelial Cells</a></h3>
+              <h3>The Effect of Fluidic Shear Stresses on Mitochondrial Networks in Endothelial Cells</h3>
             </div>
           </li>
         </ol>
@@ -253,10 +224,6 @@
       </div>
     </section>
   </main>
-  <dialog class="photo-lightbox" id="photo-lightbox" aria-label="Expanded photo">
-    <button class="lightbox-close" type="button" aria-label="Close photo">Close</button>
-    <figure><img id="lightbox-image" src="" alt=""><figcaption id="lightbox-caption"></figcaption></figure>
-  </dialog>
   <footer><div class="wrap">Rosa Silva · Biomedical Engineering</div></footer>
   <script>
     const fullHeadline = "Master’s student interested in surgical robotics.";
@@ -279,22 +246,6 @@
       typeNextCharacter();
     }
 
-    const photoDialog = document.querySelector("#photo-lightbox");
-    const lightboxImage = document.querySelector("#lightbox-image");
-    const lightboxCaption = document.querySelector("#lightbox-caption");
-    document.querySelectorAll(".gallery-photo").forEach((photoButton) => {
-      photoButton.addEventListener("click", () => {
-        const photo = photoButton.querySelector("img");
-        lightboxImage.src = photo.src;
-        lightboxImage.alt = photoButton.dataset.caption;
-        lightboxCaption.textContent = photoButton.dataset.caption;
-        photoDialog.showModal();
-      });
-    });
-    photoDialog.querySelector(".lightbox-close").addEventListener("click", () => photoDialog.close());
-    photoDialog.addEventListener("click", (event) => {
-      if (event.target === photoDialog) photoDialog.close();
-    });
   </script>
 </body>
 </html>
