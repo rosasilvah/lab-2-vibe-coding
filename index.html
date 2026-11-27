@@ -43,6 +43,9 @@
     h1 { max-width: 750px; margin: 0; font-size: clamp(3rem, 8vw, 6.6rem); letter-spacing: -.075em; line-height: .99; font-weight: 740; }
     h1 span { color: var(--ink); }
     .hero-copy { max-width: 580px; margin: 26px 0 0; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.25rem); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .hero-copy.is-typing .typing-text::after { content: "▍"; color: var(--purple); animation: caret-blink .9s steps(2, start) infinite; }
+    @keyframes caret-blink { to { visibility: hidden; } }
     .hero-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 32px; }
     .button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 19px; border: 1px solid var(--purple); border-radius: 5px; background: var(--purple); color: white; font-size: .92rem; font-weight: 650; text-decoration: none; transition: background .16s ease, transform .16s ease; }
     .button:hover { background: var(--purple-dark); transform: translateY(-1px); }
@@ -61,6 +64,24 @@
     .project-card h3 { margin: 35px 0 0; font-size: 1.28rem; letter-spacing: -.035em; line-height: 1.35; }
     .project-lines { margin-top: 23px; color: var(--muted); font-size: .9rem; line-height: 1.55; }
     .project-lines span { display: block; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .gallery-photo { width: 100%; display: block; padding: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 7px; background: white; text-align: left; cursor: zoom-in; }
+    .gallery-photo img { display: block; width: 100%; height: 260px; object-fit: cover; transition: transform .2s ease; }
+    .gallery-photo:hover img { transform: scale(1.025); }
+    .gallery-caption { display: block; padding: 12px 15px; color: var(--ink); font-size: .92rem; font-weight: 600; }
+    .photo-lightbox { width: min(92vw, 1000px); max-width: none; max-height: 92vh; padding: 16px; border: 0; border-radius: 8px; background: #fff; color: var(--ink); }
+    .photo-lightbox::backdrop { background: rgb(22 16 27 / 84%); }
+    .lightbox-close { display: block; margin: 0 0 10px auto; padding: 7px 12px; border: 1px solid var(--line); border-radius: 4px; background: white; color: var(--ink); font: inherit; cursor: pointer; }
+    .photo-lightbox figure { margin: 0; text-align: center; }
+    .photo-lightbox img { display: block; max-width: 100%; max-height: 78vh; margin: auto; object-fit: contain; }
+    .photo-lightbox figcaption { padding-top: 10px; color: var(--muted); font-size: .92rem; }
+    .publication-list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+    .publication-item { display: grid; grid-template-columns: 90px 1fr; gap: 22px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+    .publication-year { color: var(--purple); font-size: 1.1rem; font-weight: 750; }
+    .publication-type { margin: 0 0 5px; color: var(--muted); font-size: .76rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .publication-item h3 { margin: 0; font-size: 1.13rem; letter-spacing: -.02em; line-height: 1.4; }
+    .publication-item h3 a { text-decoration-color: #cbb7d9; text-underline-offset: 4px; }
+    .publication-item p:last-child { margin: 7px 0 0; color: var(--muted); font-size: .92rem; }
     .lower-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
     .lower-grid section { padding: 0; border: 0; }
     .lower-grid h2 { font-size: 2rem; margin-bottom: 24px; }
@@ -80,6 +101,9 @@
       section { padding: 64px 0; }
       .section-heading { grid-template-columns: 1fr; gap: 12px; }
       .project-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-photo img { height: 280px; }
+      .publication-item { grid-template-columns: 1fr; gap: 4px; }
       .project-card { min-height: 205px; }
       .project-card h3 { margin-top: 26px; }
       .lower-grid { grid-template-columns: 1fr; gap: 52px; }
@@ -101,6 +125,8 @@
       <a class="wordmark" href="#home">Rosa Silva</a>
       <nav aria-label="Main navigation">
         <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#publications">Publications</a>
         <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
@@ -111,7 +137,7 @@
     <div class="wrap hero">
       <p class="eyebrow">Biomedical Engineering</p>
       <h1>Rosa <span>Silva</span></h1>
-      <p class="hero-copy">Master’s student interested in surgical robotics.</p>
+      <p class="hero-copy"><span class="sr-only">Master’s student interested in surgical robotics.</span><span class="typing-text" aria-hidden="true"></span></p>
       <div class="hero-links">
         <a class="button" href="#projects">View projects</a>
         <a class="button secondary" href="#contact">Get in touch</a>
@@ -123,6 +149,54 @@
         <div>
           <p class="about-text">I am a second-year Master’s student in Dr. Su’s lab, working on force sensing for neurovascular robots in stroke intervention. Previously, I contributed to the DeSimone Lab at Stanford University, optimizing 3D-printed microneedle patches. I have also worked in the Jurney Lab and Bellofiore Lab at SJSU.</p>
         </div>
+      </div>
+    </section>
+    <section id="gallery">
+      <div class="wrap">
+        <div class="section-heading">
+          <p class="section-kicker">Photos</p>
+          <div><h2>Photo gallery</h2></div>
+        </div>
+        <div class="gallery-grid">
+          <button class="gallery-photo" type="button" aria-label="Open photo: Rosa Silva" data-caption="Rosa Silva">
+            <img src="https://rosasilvah.github.io/assets/home-BqrcBFPt.jpg" alt="" loading="lazy">
+            <span class="gallery-caption">Rosa Silva</span>
+          </button>
+          <button class="gallery-photo" type="button" aria-label="Open photo: Big Sur" data-caption="Big Sur">
+            <img src="https://rosasilvah.github.io/assets/big-sur-C3ednzqs.jpg" alt="" loading="lazy">
+            <span class="gallery-caption">Big Sur</span>
+          </button>
+          <button class="gallery-photo" type="button" aria-label="Open photo: NYC" data-caption="NYC">
+            <img src="https://rosasilvah.github.io/assets/nyc-Dj_0c9ev.jpg" alt="" loading="lazy">
+            <span class="gallery-caption">NYC</span>
+          </button>
+        </div>
+      </div>
+    </section>
+    <section id="publications">
+      <div class="wrap">
+        <div class="section-heading">
+          <p class="section-kicker">Research output</p>
+          <div><h2>Publications &amp; posters</h2></div>
+        </div>
+        <ol class="publication-list">
+          <li class="publication-item">
+            <span class="publication-year">2024</span>
+            <div>
+              <p class="publication-type">Publication · Advanced Materials</p>
+              <h3><a href="https://doi.org/10.1002/adma.202404606" target="_blank" rel="noopener noreferrer">3D-Printed Latticed Micro-Array Patches for Tunable and Versatile Intradermal Delivery</a></h3>
+              <p>Rosa Silva, et al. · Stanford University</p>
+            </div>
+          </li>
+          <li class="publication-item">
+            <span class="publication-year">2023</span>
+            <div>
+              <p class="publication-type">Predoctoral poster award · Stanford CVRS</p>
+              <h3>Research on 3D-Printed L-MAPs for Vaccine Delivery</h3>
+              <p><a href="https://med.stanford.edu/cvi/mission/news_center/articles_announcements/2023/2023-cvrs-poster-award-winners.html" target="_blank" rel="noopener noreferrer">Poster award winners</a></p>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
     <section class="projects" id="projects">
@@ -172,6 +246,48 @@
       </div>
     </section>
   </main>
+  <dialog class="photo-lightbox" id="photo-lightbox" aria-label="Expanded photo">
+    <button class="lightbox-close" type="button" aria-label="Close photo">Close</button>
+    <figure><img id="lightbox-image" src="" alt=""><figcaption id="lightbox-caption"></figcaption></figure>
+  </dialog>
   <footer><div class="wrap">Rosa Silva · Biomedical Engineering</div></footer>
+  <script>
+    const fullHeadline = "Master’s student interested in surgical robotics.";
+    const headline = document.querySelector(".typing-text");
+    const headlineContainer = headline.closest(".hero-copy");
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      headline.textContent = fullHeadline;
+    } else {
+      let character = 0;
+      headlineContainer.classList.add("is-typing");
+      const typeNextCharacter = () => {
+        headline.textContent = fullHeadline.slice(0, character + 1);
+        character += 1;
+        if (character < fullHeadline.length) {
+          window.setTimeout(typeNextCharacter, 38);
+        } else {
+          headlineContainer.classList.remove("is-typing");
+        }
+      };
+      typeNextCharacter();
+    }
+
+    const photoDialog = document.querySelector("#photo-lightbox");
+    const lightboxImage = document.querySelector("#lightbox-image");
+    const lightboxCaption = document.querySelector("#lightbox-caption");
+    document.querySelectorAll(".gallery-photo").forEach((photoButton) => {
+      photoButton.addEventListener("click", () => {
+        const photo = photoButton.querySelector("img");
+        lightboxImage.src = photo.src;
+        lightboxImage.alt = photoButton.dataset.caption;
+        lightboxCaption.textContent = photoButton.dataset.caption;
+        photoDialog.showModal();
+      });
+    });
+    photoDialog.querySelector(".lightbox-close").addEventListener("click", () => photoDialog.close());
+    photoDialog.addEventListener("click", (event) => {
+      if (event.target === photoDialog) photoDialog.close();
+    });
+  </script>
 </body>
 </html>
